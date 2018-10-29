@@ -22,9 +22,6 @@ class LibraryDetail(generics.RetrieveUpdateDestroyAPIView):  # Detail View
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
 
-
-
-
 class MgSampleList(generics.ListCreateAPIView):
     serializer_class = MgSampleSerializer
 

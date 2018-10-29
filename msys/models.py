@@ -97,6 +97,23 @@ class MgSampleFileContainer(models.Model):
 
     profiled = models.BooleanField(default=False)
     qced = models.BooleanField(default=False)
+
+    @property
+    def reads_total(self):
+        reads_total = 0
+        mg_files = list(MgFile.objects.filter(container=self))
+        for mg_file in mg_files:
+            reads_total += mg_file.reads
+        return reads_total\
+
+    @property
+    def bps_total(self):
+        bps_total = 0
+        mg_files = list(MgFile.objects.filter(container=self))
+        for mg_file in mg_files:
+            bps_total += mg_file.bps
+        return bps_total
+
     def __str__(self):
         return self.mg_sample.name + ' ' + self.preprocessing
 
@@ -120,8 +137,13 @@ class MgFile(models.Model):
     orig_file_location = models.CharField(max_length=1024, blank=True)
     import_success = models.BooleanField(default=False)
 
+    # TODO should it be here or results blabla?
+    reads = models.PositiveIntegerField(default=0, blank=True)
+    bps = models.PositiveIntegerField(default=0, blank=True)
+
     def __str__(self):
         return self.container.__str__() + ' ' + self.strand
+
 
 class DatasetSoft(models.Model):
     name = models.CharField(max_length=256, unique=True)
@@ -130,6 +152,3 @@ class DatasetSoft(models.Model):
 
     def __str__(self):
         return self.name
-
-
-

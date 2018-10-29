@@ -48,7 +48,7 @@ class MgSampleFileContainerSerializer(serializers.ModelSerializer):
         model = MgSampleFileContainer
         # fields = ['files', 'preprocessing']
         fields = '__all__'
-        extra_fields = ['files']
+        extra_fields = ['files', 'reads_total', 'bps_total']
 
     def get_field_names(self, declared_fields, info):
         expanded_fields = super(MgSampleFileContainerSerializer, self).get_field_names(declared_fields, info)

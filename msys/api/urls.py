@@ -1,4 +1,6 @@
 from django.urls import path
+
+from msys.result.views import ResultView
 from .views import *
 
 urlpatterns = [
@@ -15,5 +17,9 @@ urlpatterns = [
     path('library/<int:pk>/', LibraryDetail.as_view(), name='library-rud'),
 
     path('mg_sample/', MgSampleList.as_view(), name='mg-sample-list'),
-    path('real_sample/', RealSampleAPIView.as_view(), name='real-sample-list')
+    path('real_sample/', RealSampleAPIView.as_view(), name='real-sample-list'),
+
+    path('result/<str:type_of_res>/', ResultView.as_view())
+
+
 ]

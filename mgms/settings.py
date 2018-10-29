@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'oauth2_provider',
+    # 'oauth2_provider',
     'rest_framework',
     'msys',
     'corsheaders',
@@ -85,8 +85,8 @@ DATABASES = {
 }
 
 OAUTH2_PROVIDER = {
-    'RESOURCE_SERVER_INTROSPECTION_URL': 'http://127.0.0.1:8000/o/introspect/',
-    'RESOURCE_SERVER_AUTH_TOKEN': 'ynbvORdKW7eYlyA7GhEi9Fnlw9EKdz df',
+    # 'RESOURCE_SERVER_INTROSPECTION_URL': 'http://127.0.0.1:8000/o/introspect/',
+    # 'RESOURCE_SERVER_AUTH_TOKEN': 'ynbvORdKW7eYlyA7GhEi9Fnlw9EKdz',
     # 'RESOURCE_SERVER_INTROSPECTION_CREDENTIALS':
     # (
     #     'YlUfQRu0arj6Rl9gxcQBTwXQ8nnprExlJ2QAqWGQ',
@@ -96,7 +96,7 @@ OAUTH2_PROVIDER = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework.authentication.SessionAuthentication', # To keep the Browsable API
     )
 }

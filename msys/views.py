@@ -16,8 +16,6 @@ def get_fastqc(df_name, batch_name, how, sample_name, strand):
 
     return fastqc_html
 
-
-
 def sizeof_fmt(num, suffix='B'):
     for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
         if abs(num) < 1024.0:
