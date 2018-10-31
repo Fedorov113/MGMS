@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from msys.models import *
+from msys.models.data_models import *
 from django.conf import settings
 
 import requests

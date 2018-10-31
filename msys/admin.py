@@ -2,7 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import *
+from .models.data_models import *
+from .models.tool_models import *
 
 admin.site.register(DatasetHard)
 admin.site.register(DatasetSoft)
@@ -17,4 +18,8 @@ admin.site.register(SequencingRun)
 admin.site.register(MgSample)
 admin.site.register(MgSampleFileContainer)
 admin.site.register(MgFile)
+
+admin.site.register(Tool)
+admin.site.register(Parameter)
+
 

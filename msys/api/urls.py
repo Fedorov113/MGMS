@@ -2,6 +2,7 @@ from django.urls import path
 
 from msys.result.views import ResultView
 from .views import *
+from .tool_views import *
 
 urlpatterns = [
 
@@ -19,7 +20,11 @@ urlpatterns = [
     path('mg_sample/', MgSampleList.as_view(), name='mg-sample-list'),
     path('real_sample/', RealSampleAPIView.as_view(), name='real-sample-list'),
 
-    path('result/<str:type_of_res>/', ResultView.as_view())
+    path('result/<str:type_of_res>/', ResultView.as_view()),
+
+
+    #####---TOOL STUFF---#####
+    path('tool/', ToolList.as_view())
 
 
 ]

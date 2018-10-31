@@ -1,7 +1,7 @@
 from rest_framework import generics, mixins, viewsets
 from rest_framework.generics import get_object_or_404
 
-from msys.models import DatasetHard
+from msys.models.data_models import DatasetHard
 from msys.api.serializers import *
 from django.db.models import Q
 
