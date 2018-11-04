@@ -1,8 +1,8 @@
 from django.urls import path
 
+from msys.result.views import ResultRequest
 from msys.result.views import ResultView
 from .views import *
-from .tool_views import *
 
 urlpatterns = [
 
@@ -21,10 +21,10 @@ urlpatterns = [
     path('real_sample/', RealSampleAPIView.as_view(), name='real-sample-list'),
 
     path('result/<str:type_of_res>/', ResultView.as_view()),
+    path('result_request/', ResultRequest.as_view()),
 
 
-    #####---TOOL STUFF---#####
-    path('tool/', ToolList.as_view())
+
 
 
 ]
