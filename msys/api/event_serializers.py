@@ -5,9 +5,9 @@ from django.conf import settings
 import requests
 import json
 
-class EventSchemaSerializer(serializers.ModelSerializer):
+class SchemaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EventSchema
+        model = Schema
         fields = '__all__'
 
 class EventDataSerializer(serializers.ModelSerializer):

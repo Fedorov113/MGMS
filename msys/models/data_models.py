@@ -10,14 +10,39 @@ class DatasetHard(models.Model):
     def __str__(self):
         return self.df_name
 
+class EventType(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+
+class Schema(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    schema = models.TextField()
+    type = models.ForeignKey(EventType, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class SampleSource(models.Model):
     source_name = models.CharField(max_length=200, unique=True)
     source_description = models.TextField()
     df = models.ForeignKey(DatasetHard, on_delete=models.CASCADE)
+    main_schema = models.ForeignKey(Schema, on_delete=models.CASCADE, blank=True, null=True)
+    main_data = models.TextField(blank=True)
     def __str__(self):
         return self.source_name
 
+class EventData(models.Model):
+    schema = models.ForeignKey(Schema, on_delete=models.CASCADE)
+    # JSON data that conforms to schema
+    data = models.TextField()
+    added = models.DateTimeField()
+    # connected source
+    source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
 
 class RealSample(models.Model):
     source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
@@ -153,27 +178,3 @@ class DatasetSoft(models.Model):
 
     def __str__(self):
         return self.name
-
-class EventType(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-class EventSchema(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    schema = models.TextField()
-    type = models.ForeignKey(EventType, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-class EventData(models.Model):
-    schema = models.ForeignKey(EventSchema, on_delete=models.CASCADE)
-    # JSON data that conforms to schema
-    data = models.TextField()
-    added = models.DateTimeField()
-    # connected source
-    source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
-

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from msys.models.data_models import *
 from django.conf import settings
-
+from .event_serializers import *
 import requests
 import json
 
@@ -23,9 +23,19 @@ class DatasetHardSerializer(serializers.ModelSerializer):
 
 
 class SampleSourceSerializer(serializers.ModelSerializer):
+    main_schema = SchemaSerializer()
+
     class Meta:
         model = SampleSource
         fields = '__all__'
+        extra_fields = ['main_schema']
+
+    def get_field_names(self, declared_fields, info):
+        expanded_fields = super(SampleSourceSerializer, self).get_field_names(declared_fields, info)
+        if getattr(self.Meta, 'extra_fields', None):
+            return expanded_fields + self.Meta.extra_fields
+        else:
+            return expanded_fields
 
 
 class RealSampleSerializer(serializers.ModelSerializer):
