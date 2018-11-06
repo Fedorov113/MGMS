@@ -22,6 +22,12 @@ class DatasetHardSerializer(serializers.ModelSerializer):
         return value
 
 
+class SampleSourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SampleSource
+        fields = '__all__'
+
+
 class RealSampleSerializer(serializers.ModelSerializer):
     class Meta:
         model = RealSample

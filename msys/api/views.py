@@ -5,6 +5,20 @@ from msys.models.data_models import DatasetHard
 from msys.api.serializers import *
 from django.db.models import Q
 
+class SampleSourceList(generics.ListCreateAPIView):  # Detail View
+    # queryset = SampleSource.objects.all()
+    serializer_class = SampleSourceSerializer
+
+    def get_queryset(self):
+        qs = SampleSource.objects.all()
+        if 'pk' in self.kwargs:
+            hard_df_pk = self.kwargs['pk']
+            if hard_df_pk is not None:
+                qs = qs.filter(
+                    Q(df=hard_df_pk)
+                ).distinct()
+        return qs
+
 
 class DatasetHardList(generics.ListCreateAPIView):  # Detail View
     queryset = DatasetHard.objects.all()

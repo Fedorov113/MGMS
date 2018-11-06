@@ -18,5 +18,9 @@ admin.site.register(MgSample)
 admin.site.register(MgSampleFileContainer)
 admin.site.register(MgFile)
 
+admin.site.register(EventType)
+admin.site.register(EventSchema)
+admin.site.register(EventData)
+
 
 

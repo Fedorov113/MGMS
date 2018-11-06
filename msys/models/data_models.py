@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class DatasetHard(models.Model):
     df_name = models.CharField(max_length=200, unique=True)
     df_description = models.CharField(max_length=2000, default='Empty')
@@ -13,7 +14,7 @@ class DatasetHard(models.Model):
 class SampleSource(models.Model):
     source_name = models.CharField(max_length=200, unique=True)
     source_description = models.TextField()
-
+    df = models.ForeignKey(DatasetHard, on_delete=models.CASCADE)
     def __str__(self):
         return self.source_name
 
@@ -152,3 +153,27 @@ class DatasetSoft(models.Model):
 
     def __str__(self):
         return self.name
+
+class EventType(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class EventSchema(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    schema = models.TextField()
+    type = models.ForeignKey(EventType, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class EventData(models.Model):
+    schema = models.ForeignKey(EventSchema, on_delete=models.CASCADE)
+    # JSON data that conforms to schema
+    data = models.TextField()
+    added = models.DateTimeField()
+    # connected source
+    source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
+
