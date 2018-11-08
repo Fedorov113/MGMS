@@ -1,0 +1,1 @@
+from .result_models import GeneralResult, ProfileResult

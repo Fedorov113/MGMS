@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class DatasetHard(models.Model):
     df_name = models.CharField(max_length=200, unique=True)
     df_description = models.CharField(max_length=2000, default='Empty')
@@ -10,13 +9,13 @@ class DatasetHard(models.Model):
     def __str__(self):
         return self.df_name
 
+
 class EventType(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField()
 
     def __str__(self):
         return self.name
-
 
 
 class Schema(models.Model):
@@ -27,14 +26,17 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
+
 class SampleSource(models.Model):
     source_name = models.CharField(max_length=200, unique=True)
     source_description = models.TextField()
     df = models.ForeignKey(DatasetHard, on_delete=models.CASCADE)
     main_schema = models.ForeignKey(Schema, on_delete=models.CASCADE, blank=True, null=True)
     main_data = models.TextField(blank=True)
+
     def __str__(self):
         return self.source_name
+
 
 class EventData(models.Model):
     schema = models.ForeignKey(Schema, on_delete=models.CASCADE)
@@ -43,6 +45,7 @@ class EventData(models.Model):
     added = models.DateTimeField()
     # connected source
     source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
+
 
 class RealSample(models.Model):
     source = models.ForeignKey(SampleSource, on_delete=models.CASCADE)
@@ -130,7 +133,7 @@ class MgSampleFileContainer(models.Model):
         mg_files = list(MgFile.objects.filter(container=self))
         for mg_file in mg_files:
             reads_total += mg_file.reads
-        return reads_total\
+        return reads_total
 
     @property
     def bps_total(self):
@@ -142,6 +145,15 @@ class MgSampleFileContainer(models.Model):
 
     def __str__(self):
         return self.mg_sample.name + ' ' + self.preprocessing
+
+
+def sample_file_path(instance, filename):
+    return '{df}/{preproc}/{sample}/{strand}/fastqc/{file}.png'.format(
+        df=instance.container.mg_sample.dataset_hard.df_name,
+        preproc=instance.container.preprocessing,
+        sample=instance.container.mg_sample.name_on_fs,
+        strand=instance.strand,
+        file=filename)
 
 
 class MgFile(models.Model):
@@ -166,6 +178,7 @@ class MgFile(models.Model):
     # TODO should it be here or results blabla?
     reads = models.PositiveIntegerField(default=0, blank=True)
     bps = models.PositiveIntegerField(default=0, blank=True)
+
 
     def __str__(self):
         return self.container.__str__() + ' ' + self.strand

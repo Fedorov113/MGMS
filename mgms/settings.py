@@ -24,6 +24,11 @@ SECRET_KEY = 'g+cigqj=)vn3t@tq_)qyy4%5=(ta%o65huaw93*i($kn2euaxy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
+MEDIA_URL = '/media/'
+
+
 ALLOWED_HOSTS = []
 
 ASSHOLE_URL = 'http://127.0.0.1:17777'
@@ -81,6 +86,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'OPTIONS': {
+            'timeout': 60000.0,  # in seconds
+            # see also
+            # https://docs.python.org/3.7/library/sqlite3.html#sqlite3.connect
+        }
     }
 }
 

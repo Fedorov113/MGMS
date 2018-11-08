@@ -24,7 +24,7 @@ urlpatterns = [
     path('mg_sample/', MgSampleList.as_view(), name='mg-sample-list'),
     path('real_sample/', RealSampleAPIView.as_view(), name='real-sample-list'),
 
-    path('result/<str:type_of_res>/', ResultView.as_view()),
+    path('result/', ResultView.as_view()),
     path('result_request/', ResultRequest.as_view()),
 
 

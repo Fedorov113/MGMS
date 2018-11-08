@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from .models.data_models import *
+from .models.result_models import GeneralResult, ProfileResult, TestResult
 
 admin.site.register(DatasetHard)
 admin.site.register(DatasetSoft)
@@ -21,6 +22,10 @@ admin.site.register(MgFile)
 admin.site.register(EventType)
 admin.site.register(Schema)
 admin.site.register(EventData)
+
+admin.site.register(GeneralResult)
+admin.site.register(ProfileResult)
+admin.site.register(TestResult)
 
 
 
