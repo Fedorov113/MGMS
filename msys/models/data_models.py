@@ -18,7 +18,7 @@ class EventType(models.Model):
         return self.name
 
 
-class Schema(models.Model):
+class SchemaOld(models.Model):
     name = models.CharField(max_length=128, unique=True)
     schema = models.TextField()
     type = models.ForeignKey(EventType, on_delete=models.CASCADE)
@@ -31,7 +31,7 @@ class SampleSource(models.Model):
     source_name = models.CharField(max_length=200, unique=True)
     source_description = models.TextField()
     df = models.ForeignKey(DatasetHard, on_delete=models.CASCADE)
-    main_schema = models.ForeignKey(Schema, on_delete=models.CASCADE, blank=True, null=True)
+    main_schema = models.ForeignKey(SchemaOld, on_delete=models.CASCADE, blank=True, null=True)
     main_data = models.TextField(blank=True)
 
     def __str__(self):
@@ -39,7 +39,7 @@ class SampleSource(models.Model):
 
 
 class EventData(models.Model):
-    schema = models.ForeignKey(Schema, on_delete=models.CASCADE)
+    schema = models.ForeignKey(SchemaOld, on_delete=models.CASCADE)
     # JSON data that conforms to schema
     data = models.TextField()
     added = models.DateTimeField()

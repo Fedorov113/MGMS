@@ -10,7 +10,7 @@ class EventDataList(generics.ListCreateAPIView):  # Detail View
     serializer_class = EventDataSerializer
 
 class EventSchemaList(generics.ListCreateAPIView):  # Detail View
-    queryset = Schema.objects.all()
+    queryset = SchemaOld.objects.all()
     serializer_class = SchemaSerializer
 
 class EventTypeList(generics.ListCreateAPIView):  # Detail View

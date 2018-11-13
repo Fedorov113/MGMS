@@ -28,10 +28,16 @@ ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
 MEDIA_URL = '/media/'
 
-
 ALLOWED_HOSTS = []
 
 ASSHOLE_URL = 'http://127.0.0.1:17777'
+
+# NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:neo4j@localhost:7687'
+NEOMODEL_SIGNALS = True
+NEOMODEL_FORCE_TIMEZONE = False
+NEOMODEL_ENCRYPTED_CONNECTION = True
+NEOMODEL_MAX_POOL_SIZE = 50
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,9 +49,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'oauth2_provider',
     'rest_framework',
+    'mptt',
+    'django_neomodel',
     'msys',
     'corsheaders',
 ]
+
+from neomodel import db
+db.set_connection('bolt://neo4j:ElectricWizard113@localhost:7687')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'OPTIONS': {
-            'timeout': 60000.0,  # in seconds
+            'timeout': 60000,  # in seconds
             # see also
             # https://docs.python.org/3.7/library/sqlite3.html#sqlite3.connect
         }
@@ -107,12 +118,12 @@ OAUTH2_PROVIDER = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'rest_framework.authentication.SessionAuthentication', # To keep the Browsable API
+        # 'rest_framework.authentication.SessionAuthentication',  # To keep the Browsable API
     )
 }
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # To keep the Browsable API
+    # 'django.contrib.auth.backends.ModelBackend',  # To keep the Browsable API
     # 'oauth2_provider.backends.OAuth2Backend',
 )
 

@@ -23,6 +23,7 @@ from mgms import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/mgms/', include(('msys.api.urls', 'msys'), namespace='api-msys')),
+    path('api/graph/', include(('msys.graph_api.urls', 'graph'), namespace='api-graph')),
     # path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

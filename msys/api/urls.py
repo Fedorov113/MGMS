@@ -4,6 +4,7 @@ from msys.result.views import ResultRequest
 from msys.result.views import ResultView
 from .views import *
 from msys.api.event_views import *
+from msys.api.entry_views import *
 
 
 urlpatterns = [
@@ -32,5 +33,8 @@ urlpatterns = [
     path('event_data/', EventDataList.as_view()),
     path('event_schema/', EventSchemaList.as_view()),
 
+    path('schema_expanded/', SchemaView.as_view()),
+    path('entry/', EntryList.as_view()),
+    path('schema/', SchemaList.as_view()),
 
 ]

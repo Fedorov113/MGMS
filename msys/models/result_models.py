@@ -115,16 +115,3 @@ class ProfileResult(models.Model):
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
-
-class TestResult(models.Model):
-    test_field = models.CharField(max_length=128)
-
-    def save(self, *args, **kwargs):
-        print('IN SAVE')
-        print(kwargs)
-        self.test_field = kwargs['test_field']
-        kwargs.pop('test_field')
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-    def __str__(self):
-        return self.test_field
