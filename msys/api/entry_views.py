@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from rest_framework import generics
 
-from msys.models.entry_models import Entry, Schema
+from msys.models.entry_models import Schema
 from .entry_serializers import *
 
 def recursive_node_to_dict(node):
@@ -40,9 +40,6 @@ class SchemaView(APIView):
         tree_json = tree_json.replace('\\', '')
         return HttpResponse(tree_json, content_type='application/json')
 
-class EntryList(generics.ListCreateAPIView):  # Detail View
-    queryset = Entry.objects.all()
-    serializer_class = EventDataSerializer
 
 class SchemaList(generics.ListCreateAPIView):  # Detail View
     queryset = Schema.objects.all()

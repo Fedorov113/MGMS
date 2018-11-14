@@ -5,8 +5,6 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 
 from mgms import settings
-from msys.models.data_models import MgSampleFileContainer, MgFile, MgSample
-import msys.models.data_models as data_models
 from msys.models.result_models import GeneralResult
 
 class ResultView(APIView):
@@ -54,41 +52,3 @@ class ResultRequest(APIView):
         r = requests.post(url, data=json.dumps(data), headers=headers)
 
         return HttpResponse(json.dumps({'res': 'dev'}), content_type='application/json')
-
-
-
-
-
-
-
-
-
-
-
-        # desired_files = []
-        # for req in data['desired_results']:
-        #         if req['request']['type'] == 'profile':
-        #             if req['request']['result'] == 'fastqc':
-        #                 if req['input']['type'] == 'reads_file':
-        #                     mg_file = MgFile.objects.get(pk=req['input']['id'])
-        #
-        #                     df = str(mg_file.container.mg_sample.dataset_hard)
-        #                     sample_name_on_fs = str(mg_file.container.mg_sample.name_on_fs)
-        #                     preproc = str(mg_file.container.preprocessing)
-        #                     strand = str(mg_file.strand)
-        #                     out_file_wc = 'datasets/{df}/reads/{preproc}/{sample}/profile/{sample}_{strand}_fastqc.zip'
-        #                     out_file = out_file_wc.format(df=df, sample=sample_name_on_fs,
-        #                                                   preproc=preproc, strand=strand)
-        #
-        #                     desired_files.append(out_file)
-        #             elif req['request']['result'] == 'count':
-        #                 if req['input']['type'] == 'file':
-        #                     blabla = []
-        #
-        # headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-        # url = settings.ASSHOLE_URL + "/explorer/celery_snakemake_list/?dry=0&drmaa=1&threads=6&jobs=4"
-        # data = {'desired_files': desired_files}
-        # r = requests.post(url, data=json.dumps(data), headers=headers)
-        # print(data)
-        #
-        # return HttpResponse (json.dumps({'erf': 'SUCsdfgsdCESS'}), content_type='application/json')

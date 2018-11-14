@@ -3,7 +3,7 @@ import json
 import base64
 from django.core.files.base import ContentFile
 
-from .data_models import MgFile
+# from .data_models import MgFile
 
 
 class GeneralResult(models.Model):
@@ -37,7 +37,7 @@ def fastqc_img_path(instance, filename):
 
 
 class ProfileResult(models.Model):
-    mg_file = models.ForeignKey(MgFile, on_delete=models.CASCADE)
+    # mg_file = models.ForeignKey(MgFile, on_delete=models.CASCADE)
     general_result = models.ForeignKey(GeneralResult, on_delete=models.CASCADE)
 
     bp = models.IntegerField()

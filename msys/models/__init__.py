@@ -1,2 +1,2 @@
 from .result_models import GeneralResult, ProfileResult
-from .entry_models import Schema, Entry
+from .entry_models import Schema

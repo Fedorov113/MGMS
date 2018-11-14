@@ -186,4 +186,4 @@ class AddEntry(APIView):
             graph.create(ab)
 
 
-        return HttpResponse(json.dumps('a'), content_type='application/json')
+        return HttpResponse(json.dumps(a), content_type='application/json')
