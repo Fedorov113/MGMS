@@ -118,12 +118,12 @@ OAUTH2_PROVIDER = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        # 'rest_framework.authentication.SessionAuthentication',  # To keep the Browsable API
+        'rest_framework.authentication.SessionAuthentication',  # To keep the Browsable API
     )
 }
 
 AUTHENTICATION_BACKENDS = (
-    # 'django.contrib.auth.backends.ModelBackend',  # To keep the Browsable API
+    'django.contrib.auth.backends.ModelBackend',  # To keep the Browsable API
     # 'oauth2_provider.backends.OAuth2Backend',
 )
 

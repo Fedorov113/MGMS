@@ -10,6 +10,7 @@ class SchemaSerializer(serializers.ModelSerializer):
         model = Schema
         fields = '__all__'
 
+
 class EventDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry

@@ -3,11 +3,18 @@ from neomodel import (config, StructuredNode, StringProperty, IntegerProperty,
 
 config.DATABASE_URL = 'bolt://neo4j:ElectricWizard113@localhost:7687'
 
+class Study(StructuredNode):
+    name = StringProperty()
+    description = StringProperty()
+
+    sources = RelationshipFrom('Source', 'IN_STUDY')
+
 class Source(StructuredNode):
     name = StringProperty()
     description = StringProperty()
 
     sample = RelationshipTo('Sample', 'PROVIDED_SAMPLE')
+    study = RelationshipTo('Study', 'IN_STUDY')
 
 class Sample(StructuredNode):
     name = StringProperty()
@@ -25,8 +32,6 @@ class SampleMg(StructuredNode):
     # traverse outgoing CONTAINS relations, inflate to SampleMgContainer objects
     container = RelationshipTo('SampleMgContainer', 'CONTAINS')
 
-
-
 class SampleMgContainer(StructuredNode):
     preproc = StringProperty()
     # traverse incoming CONTAINS relation, inflate to SampleMg objects
@@ -38,3 +43,11 @@ class SampleMgContainerFile(StructuredNode):
     orig_file_location = StringProperty()
     # traverse incoming IS_FROM relation, inflate to Person objects
     sample_mg_container = RelationshipFrom('SampleMgContainer', 'CONTAINS')
+
+
+
+
+
+
+    # traverse incoming IS_FROM relation, inflate to Person objects
+    #sample_mg_container = RelationshipFrom('SampleMgContainer', 'CONTAINS')

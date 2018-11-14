@@ -47,3 +47,8 @@ class EntryList(generics.ListCreateAPIView):  # Detail View
 class SchemaList(generics.ListCreateAPIView):  # Detail View
     queryset = Schema.objects.all()
     serializer_class = SchemaSerializer
+
+class SchemaJson(APIView):
+    def get(self, params, schema_name):# Detail View
+        schema = Schema.objects.get(name=schema_name)
+        return HttpResponse(schema.schema, content_type='application/json')
